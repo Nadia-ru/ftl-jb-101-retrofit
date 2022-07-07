@@ -1,9 +1,6 @@
 package com.foodtech.retrofit;
 
-import com.foodtech.retrofit.request.AlbumCreateRequest;
-import com.foodtech.retrofit.request.AlbumUpdateRequest;
-import com.foodtech.retrofit.request.PostCreateRequest;
-import com.foodtech.retrofit.request.PostUpdateRequest;
+import com.foodtech.retrofit.request.*;
 import com.foodtech.retrofit.response.AlbumResponse;
 import com.foodtech.retrofit.response.CommentResponse;
 import com.foodtech.retrofit.response.PostResponse;
@@ -28,10 +25,22 @@ public interface JsonPlaceholderApi {
     Call<PostResponse> postWithId(@Path ("id") Integer id);
     @GET("/posts/{id}/comments")
     Call<List<CommentResponse>> postComments(@Path ("id") Integer id);
+
+
     @GET("/users")
     Call<List<UserResponse>> users();
+    @GET("/users/{id}")
+    Call<UserResponse> userWithId(@Path ("id") Integer id);
     @GET("/users/{userId}/albums")
     Call<List<AlbumResponse>> userAlbums(@Path("userId") Integer userId);
+    @POST("/users")
+    Call<UserResponse> userCreate(@Body UserCreateRequest request);
+    @PUT("/users/{id}")
+    Call<UserResponse> userUpdate(@Path ("id") Integer id, @Body UserUpdateRequest request);
+    @DELETE("/users/{id}")
+    Call<Void> userDelete(@Path ("id") Integer id);
+
+
     @GET("/albums")
     Call<List<AlbumResponse>> albums();
     @GET("/albums/{id}")
