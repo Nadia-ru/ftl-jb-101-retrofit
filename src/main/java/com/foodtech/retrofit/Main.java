@@ -1,9 +1,6 @@
 package com.foodtech.retrofit;
 
-import com.foodtech.retrofit.request.AlbumCreateRequest;
-import com.foodtech.retrofit.request.AlbumUpdateRequest;
-import com.foodtech.retrofit.request.PostCreateRequest;
-import com.foodtech.retrofit.request.PostUpdateRequest;
+import com.foodtech.retrofit.request.*;
 import com.foodtech.retrofit.response.AlbumResponse;
 import com.foodtech.retrofit.response.CommentResponse;
 import com.foodtech.retrofit.response.PostResponse;
@@ -118,5 +115,46 @@ public class Main{
         System.out.println("__Album DELETE___");
         Boolean albumDelete = api.albumDelete(2).execute().isSuccessful();
         System.out.println(albumDelete);
+
+
+                System.out.println("____users______");
+        List<UserResponse> userResponses = api.users().execute().body();
+        System.out.println(userResponses.toString());
+
+        System.out.println("__user with id___");
+        UserResponse userWithId = api.userWithId(1).execute().body();
+        System.out.println(userWithId);
+
+        System.out.println("_USER CREATE_____");
+        UserResponse userCreate = api.userCreate(UserCreateRequest.builder()
+                .name("Nadya")
+                .username("Shuu")
+                .email("a@gmail.com")
+                .address(UserCreateRequest.Address.builder().street("7 Gv").suite("yes").city("Volgograd").zipcode("400000")
+                        .geo(UserCreateRequest.Geo.builder().lat("600").lng("400").build()).build())
+                        .phone("yes")
+                                .website("vk.com")
+                                        .company(UserCreateRequest.Company.builder().name("FoodTech").catchPhrase("food").bs(" ").build())
+                                                .build()).execute().body();
+        System.out.println(userCreate);
+
+        System.out.println("_USER UPdate____");
+        UserResponse userUpdate = api.userUpdate(3,UserUpdateRequest.builder()
+                        .id(3)
+                .name("Nadya")
+                .username("Shuu")
+                .email("a@gmail.com")
+                .address(UserUpdateRequest.Address.builder().street("7 Gv").suite("yes").city("Volgograd").zipcode("400000")
+                        .geo(UserUpdateRequest.Geo.builder().lat("600").lng("400").build()).build())
+                        .phone("yes")
+                                .website("vk.com")
+                                        .company(UserUpdateRequest.Company.builder().name("FoodTech").catchPhrase("food").bs(" ").build())
+                                                .build()).execute().body();
+        System.out.println(userUpdate);
+
+
+        System.out.println("__User DELETE___");
+        Boolean userDelete = api.userDelete(2).execute().isSuccessful();
+        System.out.println(userDelete);
     }
 }
